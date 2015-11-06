@@ -26,7 +26,7 @@ if "CMG_TOTAL_UNITS" in os.environ:
   config.Data.totalUnits = int(os.environ["CMG_TOTAL_UNITS"])
 
 config.Data.inputDataset = dataset
-config.Data.publishDataName = m.group(2)+"_"+production_label
+config.Data.outputDatasetTag = m.group(2)+"_"+production_label
 lumiMask =  os.environ["CMG_LUMI_MASK"]
 if lumiMask != "None":
   config.Data.lumiMask = lumiMask

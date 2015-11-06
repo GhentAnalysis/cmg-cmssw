@@ -1,3 +1,0 @@
-getCMGFromDPM.py --usernameDPM=schoef --target=cmgTuples/Data50ns_1l_MuonEG_Run2015B-17Jul2015-v1_Data50ns --usernameNFS=rschoefbeck --source=/cmgTuples/Data50ns_1l/MuonEG/Run2015B-17Jul2015-v1_Data50ns/150827_112841/0000
-getCMGFromDPM.py --usernameDPM=schoef --target=cmgTuples/Data50ns_1l_MuonEG_Run2015B-PromptReco-v1_Data50ns --usernameNFS=rschoefbeck --source=/cmgTuples/Data50ns_1l/MuonEG/Run2015B-PromptReco-v1_Data50ns/150827_113017/0000
-getCMGFromDPM.py --usernameDPM=schoef --target=cmgTuples/Data50ns_1l_MuonEG_Run2015B-PromptReco-v1_Data50ns_2 --usernameNFS=rschoefbeck --source=/cmgTuples/Data50ns_1l/MuonEG/Run2015B-PromptReco-v1_Data50ns_2/150831_122358/0000
