@@ -424,11 +424,7 @@ QCD_MuX_50ns = [ QCD_Mu15_50ns ] + QCD_Mu5_50ns
 ### ----------------------------- summary ----------------------------------------
 
 
-<<<<<<< HEAD
-mcSamples_Asymptotic25ns = TTs + SingleTop + VJets + DYJetsM5to50 + DYJetsM50HT + WJetsToLNuHT + ZJetsToNuNuHT + GJetsHT + QCDPt + DiBosons + TTV + Higgs + QCD_ElX + QCD_MuX
-=======
 mcSamples_Asymptotic25ns = TTs + SingleTop + VJets + DYJetsM50HT + WJetsToLNuHT + ZJetsToNuNuHT + GJetsHT + QCDPt + DiBosons + TTV + Higgs + TriBosons + Rares + QCD_ElX + QCD_MuX
->>>>>>> cmg-central/CMGTools-from-CMSSW_7_4_12
 
 mcSamples_Asymptotic50ns = [ TTJets_50ns, TTJets_LO_50ns, TT_pow_50ns, WJetsToLNu_50ns, DYJetsToLL_M10to50_50ns, DYJetsToLL_M50_50ns, GJets_Pt15to6000_50ns] + DYJetsM50HT_50ns + QCDPt_50ns + SingleTop_50ns + DiBosons_50ns + QCD_MuX_50ns
 

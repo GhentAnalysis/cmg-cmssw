@@ -67,7 +67,7 @@ elif isolation == "relIso03":
 
 
 # --- LEPTON SKIMMING ---
-ttHLepSkim.minLeptons = 0
+ttHLepSkim.minLeptons = 1
 ttHLepSkim.maxLeptons = 999
 #LepSkim.idCut  = ""
 #LepSkim.ptCuts = []
