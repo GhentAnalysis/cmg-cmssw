@@ -67,7 +67,7 @@ elif isolation == "relIso03":
 
 
 # --- LEPTON SKIMMING ---
-ttHLepSkim.minLeptons = 1
+ttHLepSkim.minLeptons = 0
 ttHLepSkim.maxLeptons = 999
 #LepSkim.idCut  = ""
 #LepSkim.ptCuts = []
@@ -80,9 +80,14 @@ jetAna.jetEta = 5.2
 jetAna.addJECShifts = True
 jetAna.doQG = True
 jetAna.smearJets = False #should be false in susycore, already
-jetAna.recalibrateJets =  True #For data
 
-metAna.recalibrate = False #should be false in susycore, already
+jetAna.recalibrateJets =  True #For data #FIXME
+jetAna.calculateSeparateCorrections = True #should be true if recalibrate, otherwise L1 inconsistent
+#metAna.recalibrate = False 
+
+jetAna.calculateType1METCorrection = True
+jetAna.dataGT   = "Summer15_25nsV6_DATA"
+metAna.recalibrate = "type1"
 
 isoTrackAna.setOff=False
 genAna.allGenTaus = True
@@ -277,7 +282,7 @@ if getHeppyOption("loadSamples"):
     for comp in selectedComponents:
         comp.splitFactor = 1
         comp.files = comp.files[10:11]
-        comp.json = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data/json/Cert_246908-258750_13TeV_PromptReco_Collisions15_25ns_JSON_Silver.txt" 
+        comp.json = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data/json/Cert_246908-260627_13TeV_PromptReco_Collisions15_25ns_JSON_Silver.txt" 
 #        comp.files = [ 'root://eoscms.cern.ch//eos/cms/store/data/Run2015D/SingleMuon/MINIAOD/PromptReco-v3/000/256/676/00000/C2D5A4CC-F55F-E511-A02A-02163E0123FC.root'] 
         comp.isMC = False
         comp.isData = True

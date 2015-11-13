@@ -37,6 +37,7 @@ config.Data.outLFNDirBase = '/store/user/' + user+'/cmgTuples/'
 remoteDir = os.environ["CMG_REMOTE_DIR"]
 if remoteDir!='':
   config.Data.outLFNDirBase+=remoteDir.rstrip('/')+'/'
+print "config.Data.outLFNDirBase",config.Data.outLFNDirBase
 config.Data.publication = False
 #config.Data.primaryDataset = 'MyTest'
 #config.Data.totalUnits = 5
