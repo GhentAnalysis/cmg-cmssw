@@ -67,7 +67,7 @@ elif isolation == "relIso03":
 
 
 # --- LEPTON SKIMMING ---
-ttHLepSkim.minLeptons = 0
+ttHLepSkim.minLeptons = 1
 ttHLepSkim.maxLeptons = 999
 #LepSkim.idCut  = ""
 #LepSkim.ptCuts = []
@@ -250,7 +250,7 @@ sequence = cfg.Sequence(
         treeProducer,
         ])
 
-isData = True 
+isData = False 
 #bx = '50ns'
 bx = '25ns'
 
@@ -265,7 +265,7 @@ if getHeppyOption("loadSamples"):
   if not isData and bx=='25ns':
     selectedComponents = [TTJets_DiLepton]
     for comp in selectedComponents:
-#      comp.files=['root://xrootd.unl.edu//store/mc/RunIISpring15DR74/tZq_ll_4f_13TeV-amcatnlo-pythia8_TuneCUETP8M1/MINIAODSIM/Asympt25ns_MCRUN2_74_V9-v2/40000/102EC100-5D2A-E511-A807-0CC47A4D99A4.root']
+      comp.files=['root://xrootd.unl.edu//store/mc/RunIIWinter15GS/TTbarDMJets_pseudoscalar_Mchi-10_Mphi-100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/GEN-SIM/MCRUN2_71_V1-v1/50000/04E9DCD7-4022-E511-BAC1-3417EBE710B0.root']
       comp.files = comp.files[:1]
       comp.splitFactor = len(comp.files) 
   if isData and bx=='50ns':

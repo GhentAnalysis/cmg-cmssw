@@ -213,6 +213,7 @@ QCD_Pt1000toInf_Mu5 = kreator.makeMCComponent("QCD_Pt1000toInf_Mu5" , "/QCD_Pt-1
 QCD_Mu5 = [
 QCD_Pt15to20_Mu5,
 QCD_Pt20to30_Mu5,
+QCD_Pt30to50_Mu5,
 QCD_Pt50to80_Mu5,
 QCD_Pt80to120_Mu5,
 QCD_Pt120to170_Mu5,
