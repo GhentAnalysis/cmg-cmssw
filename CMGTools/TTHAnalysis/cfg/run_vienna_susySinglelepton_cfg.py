@@ -265,7 +265,8 @@ if getHeppyOption("loadSamples"):
   if not isData and bx=='25ns':
     selectedComponents = [TTJets_DiLepton]
     for comp in selectedComponents:
-      comp.files=['root://xrootd.unl.edu//store/mc/RunIIWinter15GS/TTbarDMJets_pseudoscalar_Mchi-10_Mphi-100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/GEN-SIM/MCRUN2_71_V1-v1/50000/04E9DCD7-4022-E511-BAC1-3417EBE710B0.root']
+#      comp.files=['root://xrootd.unl.edu//store/mc/RunIIWinter15GS/TTbarDMJets_pseudoscalar_Mchi-10_Mphi-100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/GEN-SIM/MCRUN2_71_V1-v1/50000/04E9DCD7-4022-E511-BAC1-3417EBE710B0.root']
+      comp.files=['root://eoscms.cern.ch//store/mc/RunIISpring15DR74/SMS-T2tt_mStop-500_mLSP-325_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/Asympt25ns_MCRUN2_74_V9-v1/40000/8CDE7EB6-D87C-E511-90E7-02163E013E40.root']
       comp.files = comp.files[:1]
       comp.splitFactor = len(comp.files) 
   if isData and bx=='50ns':

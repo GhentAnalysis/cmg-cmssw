@@ -5,7 +5,7 @@ from CMGTools.RootTools.samples.TTbarDMJets_signals_RunIISpring15MiniAODv2 impor
 from CMGTools.RootTools.samples.samples_13TeV_DATA2015 import *
 from CMGTools.RootTools.samples.triggers_13TeV_Spring15 import *
 from CMGTools.RootTools.samples.triggers_13TeV_Spring15_1l import *
-
+from CMGTools.RootTools.samples.samples_13TeV_signals import SMS_T2tt_2J_mStop500_mLSP325, SMS_T2tt_2J_mStop850_mLSP100
 ##applying the correct json files to PrompReco and July17 samples
 for sample in dataSamples_Run2015B:
 #  sample.json = "$CMSSW_BASE/src/CMGTools/TTHAnalysis/data/json/Cert_246908-251883_13TeV_PromptReco_Collisions15_JSON_v2_Non17Jul2015.txt"
