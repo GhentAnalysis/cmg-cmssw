@@ -107,8 +107,6 @@ genAna = cfg.Analyzer(
     # Make also the splitted lists
     makeSplittedGenLists = True,
     allGenTaus = False,
-    # Save LHE weights from LHEEventProduct
-    makeLHEweights = True,
     # Print out debug information
     verbose = False,
     )
@@ -122,6 +120,11 @@ genHFAna = cfg.Analyzer(
     status2Only = False,
     bquarkPtCut = 15.0,
 )
+
+lheWeightAna = cfg.Analyzer(
+    LHEWeightAnalyzer, name="LHEWeightAnalyzer",
+)
+
 pdfwAna = cfg.Analyzer(
     PDFWeightsAnalyzer, name="PDFWeightsAnalyzer",
     PDFWeights = [ pdf for pdf,num in PDFWeights ]
@@ -214,6 +217,7 @@ photonAna = cfg.Analyzer(
     gammaID = "POG_PHYS14_25ns_Loose",
     rhoPhoton = 'fixedGridRhoFastjetAll',
     gamma_isoCorr = 'rhoArea',
+    conversionSafe_eleVeto = False,
     do_mc_match = True,
     do_randomCone = False,
 )
@@ -478,6 +482,7 @@ ttHCoreEventAna = cfg.Analyzer(
 
 # Core sequence of all common modules
 susyCoreSequence = [
+    lheWeightAna,
     skimAnalyzer,
    #eventSelector,
     jsonAna,
