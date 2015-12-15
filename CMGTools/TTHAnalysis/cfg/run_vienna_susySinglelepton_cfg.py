@@ -75,7 +75,7 @@ ttHLepSkim.maxLeptons = 999
 # --- JET-LEPTON CLEANING ---
 jetAna.minLepPt = 10
 jetAna.applyL2L3Residual = 'Data' 
-jetAna.jetPt = 25
+jetAna.jetPt = 0
 jetAna.jetEta = 5.2
 jetAna.addJECShifts = True
 jetAna.doQG = True
@@ -253,22 +253,36 @@ sequence = cfg.Sequence(
 isData = False 
 #bx = '50ns'
 bx = '25ns'
+isFastSim = True
+
+hbheFilterAna.isFastSim = isFastSim
+assert not (isData and isFastSim), "Provided 'isFastSim' when running on data."
 
 #if True or getHeppyOption("loadSamples"):
 if getHeppyOption("loadSamples"):
   from CMGTools.RootTools.samples.samples_13TeV_RunIISpring15MiniAODv2 import *
+  from CMGTools.RootTools.samples.samples_13TeV_signals import *
   if not isData and bx=='50ns':
     selectedComponents = [DYJetsToLL_M50_50ns]
     for comp in selectedComponents:
       comp.files=comp.files[:1]
       comp.splitFactor = 1 
   if not isData and bx=='25ns':
-    selectedComponents = [TTJets_DiLepton]
-    for comp in selectedComponents:
-#      comp.files=['root://xrootd.unl.edu//store/mc/RunIIWinter15GS/TTbarDMJets_pseudoscalar_Mchi-10_Mphi-100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/GEN-SIM/MCRUN2_71_V1-v1/50000/04E9DCD7-4022-E511-BAC1-3417EBE710B0.root']
-      comp.files=['root://eoscms.cern.ch//store/mc/RunIISpring15DR74/SMS-T2tt_mStop-500_mLSP-325_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/Asympt25ns_MCRUN2_74_V9-v1/40000/8CDE7EB6-D87C-E511-90E7-02163E013E40.root']
-      comp.files = comp.files[:1]
-      comp.splitFactor = len(comp.files) 
+    if isFastSim: 
+#      selectedComponents = [SMS_T2tt_2J_mStop500_mLSP325]
+      selectedComponents = [SMS_T2tt_mStop500_525_550_mLSP1to425_325to450_1to475]
+#      selectedComponents = [SMS_T1bbbb_mGluino1000_1025_mLSP1to975_1000]
+      for comp in selectedComponents:
+        comp.files = comp.files[:1]
+        comp.splitFactor = len(comp.files)
+    else: 
+      selectedComponents = [TTJets_DiLepton]
+      for comp in selectedComponents:
+        comp.files=['root://xrootd.unl.edu//store/mc/RunIIWinter15GS/TTbarDMJets_pseudoscalar_Mchi-10_Mphi-100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/GEN-SIM/MCRUN2_71_V1-v1/50000/04E9DCD7-4022-E511-BAC1-3417EBE710B0.root']
+  #      comp.files=['root://eoscms.cern.ch//store/mc/RunIISpring15DR74/SMS-T2tt_mStop-500_mLSP-325_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/Asympt25ns_MCRUN2_74_V9-v1/40000/8CDE7EB6-D87C-E511-90E7-02163E013E40.root']
+        comp.files=['root://eoscms.cern.ch//store/mc/RunIISpring15MiniAODv2/SMS-T2tt_mStop-200_mLSP-1to125_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/40000/02C53653-469F-E511-89F2-001E67A3E8F9.root']
+        comp.files = comp.files[:1]
+        comp.splitFactor = len(comp.files)
   if isData and bx=='50ns':
     from CMGTools.RootTools.samples.samples_13TeV_DATA2015 import *
     selectedComponents = [ MuonEG_Run2015B ]

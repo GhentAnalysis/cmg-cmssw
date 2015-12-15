@@ -58,7 +58,16 @@ SMS_T1bbbb_mGluino1000_1025_mLSP1to975_1000 = kreator.makeMCComponent("SMS_T1bbb
 SMS_T1bbbb_mGluino1450_1500_mLSP250to1400_1350to1450 = kreator.makeMCComponent("SMS_T1bbbb_mGluino1450_1500_mLSP250to1400_1350to1450", "/SMS-T1bbbb_mGluino-1450-1500_mLSP-250to1400-1350to1450_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM", "CMS", ".*root", 1.0, useAAA=True)
 SMS_T1bbbb_mGluino1500_1550_mLSP1to1300_1000to1300 = kreator.makeMCComponent("SMS_T1bbbb_mGluino1500_1550_mLSP1to1300_1000to1300", "/SMS-T1bbbb_mGluino-1500-1550_mLSP-1to1300-1000to1300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15FSPremix-MCRUN2_74_V9-v1/MINIAODSIM", "CMS", ".*root", 1.0, useAAA=True)
 
-SignalSUSYFullScan = [ SMS_T1bbbb_mGluino1000_1025_mLSP1to975_1000, SMS_T1bbbb_mGluino1500_1550_mLSP1to1300_1000to1300 ]
+SMS_T2tt_mStop200_mLSP1to125                           = kreator.makeMCComponent("SMS_T2tt_mStop200_mLSP1to125", "/SMS-T2tt_mStop-200_mLSP-1to125_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM" , "CMS", ".*root", 1.0, useAAA=True)
+#SMS_T2tt_mStop225_mLSP25to150                          = kreator.makeMCComponent("SMS_T2tt_mStop225_mLSP25to150", "/SMS-T2tt_mStop-225_mLSP-25to150_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root", 1.0, useAAA=True)
+SMS_T2tt_mStop500_525_550_mLSP1to425_325to450_1to475   = kreator.makeMCComponent("SMS_T2tt_mStop500_525_550_mLSP1to425_325to450_1to475", "/SMS-T2tt_mStop-500-525-550_mLSP-1to425-325to450-1to475_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root", 1.0, useAAA=True)
+SMS_T2tt_mStop600_950_mLSP1to450                       = kreator.makeMCComponent("SMS_T2tt_mStop600_950_mLSP1to450", "/SMS-T2tt_mStop-600-950_mLSP-1to450_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISpring15MiniAODv2-FastAsympt25ns_74X_mcRun2_asymptotic_v2-v1/MINIAODSIM", "CMS", ".*root", 1.0, useAAA=True)
+
+
+SignalSUSYFullScan = [ \
+SMS_T1bbbb_mGluino1000_1025_mLSP1to975_1000, SMS_T1bbbb_mGluino1500_1550_mLSP1to1300_1000to1300,
+SMS_T2tt_mStop200_mLSP1to125, SMS_T2tt_mStop500_525_550_mLSP1to425_325to450_1to475, SMS_T2tt_mStop600_950_mLSP1to450
+]
 
 
 #SMS_T2bb_2J_mStop600_mLSP580 = kreator.makeMyPrivateMCComponent("SMS_T2bb_2J_mStop600_mLSP580", "/SMS-T2bb_2J_mStop-600_mLSP-580_Tune4C_13TeV-madgraph-tauola/namin-step3-fb89f44b0d6970d718ed21d513cd1c9d/USER", "PRIVATE", ".*root", "phys03", 0.174599, useAAA=True)

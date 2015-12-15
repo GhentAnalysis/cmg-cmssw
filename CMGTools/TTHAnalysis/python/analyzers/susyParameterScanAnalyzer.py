@@ -64,13 +64,16 @@ class susyParameterScanAnalyzer( Analyzer ):
                 self.warned_already = True
             return
         lheprod = self.mchandles['lhe'].product()
-        scanline = re.compile(r"#\s*model\s+([A-Za-z0-9]+)_((\d+\.?\d*)(_\d+\.?\d*)*)\s+(\d+\.?\d*)\s*")
+#        scanline = re.compile(r"#\s*model\s+([A-Za-z0-9]+)_((\d+\.?\d*)(_\d+\.?\d*)*)\s+(\d+\.?\d*)\s*")
+        scanline = re.compile(r"#\s*model\s+([A-Za-z0-9]+)_((\d+\.?\d*)(_\d+\.?\d*)*)")
         for i in xrange(lheprod.comments_size()):
             comment = lheprod.getComment(i)
+#            print "Comment:%s"%comment
             m = re.match(scanline, comment) 
             if m:
                 event.susyModel = m.group(1)
                 masses = [float(x) for x in m.group(2).split("_")]
+#                print masses
                 if len(masses) >= 1: event.genSusyMScan1 = masses[0]
                 if len(masses) >= 2: event.genSusyMScan2 = masses[1]
                 if len(masses) >= 3: event.genSusyMScan3 = masses[2]

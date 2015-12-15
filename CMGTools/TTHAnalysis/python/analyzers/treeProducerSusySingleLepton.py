@@ -70,6 +70,7 @@ susySingleLepton_globalVariables = susyCore_globalVariables + [
             # ----------------------- HT from LHE event (requires LHE analyzer to have run)  --------------------------------------------------------- #
             NTupleVariable("lheHT", lambda ev : ev.lheHT, help="H_{T} computed from quarks and gluons in Heppy LHEAnalyzer", mcOnly=True),
             NTupleVariable("lheHTIncoming", lambda ev : ev.lheHTIncoming, help="H_{T} computed from quarks and gluons in Heppy LHEAnalyzer (only LHE status<0 as mothers)", mcOnly=True),
+            NTupleVariable("LHEweight_original", lambda ev: ev.LHE_originalWeight if hasattr(ev,'LHE_originalWeight') else 0, mcOnly=True, help="original LHE weight"),
             # ----------------------- MET filter information (temporary)  -------------------------------------------------------------------- #
 
             NTupleVariable("Flag_HBHENoiseFilterReRun", lambda ev: ev.hbheFilterNew, help="HBEHE temporary filter decision"),
@@ -96,10 +97,12 @@ susySingleLepton_collections.update({
             "cleanJetsAll"       : NTupleCollection("Jet",     jetTypeSusy, 25, help="Cental jets after full selection and cleaning, sorted by pt"),
             "fatJets"         : NTupleCollection("FatJet",  fatJetType,  15, help="AK8 jets, sorted by pt"),
             "genJets"         : NTupleCollection("GenJet",  genJetType,  15, help="Gen Jets, sorted by pt"),
+            "discardedJets" : NTupleCollection("DiscJet", jetTypeSusy, 15, help="Jets discarted in the jet-lepton cleaning"),
+            "cleanJetsFailIdAll" : NTupleCollection("JetFailId", jetTypeSusy, 15, help="Jets failing id after jet-lepton cleaning"),
 #            "reclusteredFatJets" : NTupleCollection("RCFatJet",     fourVectorType,20, help="FatJets1.2 reclusterd from ak4 cleanJetsAll pT > 30, eta <5 "),
             ##------------------------------------------------
             "ivf"       : NTupleCollection("SV",     svType, 20, help="SVs from IVF"),
             "selectedPhotons"    : NTupleCollection("gamma", photonTypeSusy, 50, help="photons with pt>15 and loose cut based ID"),
-
+            "LHE_weights" : NTupleCollection("LHEweight", weightsInfoType, 1000, mcOnly=True, help="LHE weight info"),
 })
 

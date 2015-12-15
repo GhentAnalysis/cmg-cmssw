@@ -23,6 +23,7 @@ class hbheAnalyzer( Analyzer ):
     def __init__(self, cfg_ana, cfg_comp, looperName ):
         super(hbheAnalyzer,self).__init__(cfg_ana,cfg_comp,looperName)
         self.IgnoreTS4TS5ifJetInLowBVRegion = cfg_ana.IgnoreTS4TS5ifJetInLowBVRegion
+        self.isFastSim = cfg_ana.isFastSim
 
     def declareHandles(self):
         super(hbheAnalyzer, self).declareHandles()
@@ -32,6 +33,10 @@ class hbheAnalyzer( Analyzer ):
         super(hbheAnalyzer,self).beginLoop( setup )
 
     def process(self, event):
+        if self.isFastSim:
+          event.hbheFilterNew = 1
+          event.hbheFilterIso = 1
+          return True
         self.readCollections( event.input )
 
         event.hbheGoodJetFoundInLowBVRegion = False
@@ -72,5 +77,6 @@ class hbheAnalyzer( Analyzer ):
 setattr(hbheAnalyzer,"defaultConfig", cfg.Analyzer(
         class_object = hbheAnalyzer,
         IgnoreTS4TS5ifJetInLowBVRegion = False,
+        isFastSim=True
         )
 )
