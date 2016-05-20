@@ -33,37 +33,38 @@
 
 CalibratedElectronProducer::CalibratedElectronProducer( const edm::ParameterSet & cfg )
 {
-  inputElectronsToken_ = consumes<reco::GsfElectronCollection>(cfg.getParameter<edm::InputTag>("inputElectronsTag"));
-  
-  energyRegToken_      = consumes<edm::ValueMap<double> >(cfg.getParameter<edm::InputTag>("nameEnergyReg"));
-  energyErrorRegToken_ = consumes<edm::ValueMap<double> >(cfg.getParameter<edm::InputTag>("nameEnergyErrorReg"));
-  
-  recHitCollectionEBToken_ = consumes<EcalRecHitCollection>(cfg.getParameter<edm::InputTag>("recHitCollectionEB"));
-  recHitCollectionEEToken_ = consumes<EcalRecHitCollection>(cfg.getParameter<edm::InputTag>("recHitCollectionEE"));
+    inputElectronsToken_ = consumes<reco::GsfElectronCollection>(cfg.getParameter<edm::InputTag>("inputElectronsTag"));
 
-  
-  nameNewEnergyReg_      = cfg.getParameter<std::string>("nameNewEnergyReg");
-  nameNewEnergyErrorReg_ = cfg.getParameter<std::string>("nameNewEnergyErrorReg");
-  newElectronName_ = cfg.getParameter<std::string>("outputGsfElectronCollectionLabel");
+    energyRegToken_      = consumes<edm::ValueMap<double> >(cfg.getParameter<edm::InputTag>("nameEnergyReg"));
+    energyErrorRegToken_ = consumes<edm::ValueMap<double> >(cfg.getParameter<edm::InputTag>("nameEnergyErrorReg"));
+
+    recHitCollectionEBToken_ = consumes<EcalRecHitCollection>(cfg.getParameter<edm::InputTag>("recHitCollectionEB"));
+    recHitCollectionEEToken_ = consumes<EcalRecHitCollection>(cfg.getParameter<edm::InputTag>("recHitCollectionEE"));
 
 
-  dataset = cfg.getParameter<std::string>("inputDataset");
-  isMC = cfg.getParameter<bool>("isMC");
-  updateEnergyError = cfg.getParameter<bool>("updateEnergyError");
-  lumiRatio = cfg.getParameter<double>("lumiRatio");
-  correctionsType = cfg.getParameter<int>("correctionsType");
-  applyLinearityCorrection = cfg.getParameter<bool>("applyLinearityCorrection");
-  combinationType = cfg.getParameter<int>("combinationType");
-  verbose = cfg.getParameter<bool>("verbose");
-  synchronization = cfg.getParameter<bool>("synchronization");
-  combinationRegressionInputPath = cfg.getParameter<std::string>("combinationRegressionInputPath");
-  scaleCorrectionsInputPath = cfg.getParameter<std::string>("scaleCorrectionsInputPath");
-  linCorrectionsInputPath   = cfg.getParameter<std::string>("linearityCorrectionsInputPath");
-  
-  //basic checks
-  if ( isMC && ( dataset != "Summer11" && dataset != "Fall11"
-		 && dataset!= "Summer12" && dataset != "Summer12_DR53X_HCP2012"
-		 && dataset != "Summer12_LegacyPaper" ) )
+    nameNewEnergyReg_      = cfg.getParameter<std::string>("nameNewEnergyReg");
+    nameNewEnergyErrorReg_ = cfg.getParameter<std::string>("nameNewEnergyErrorReg");
+    newElectronName_ = cfg.getParameter<std::string>("outputGsfElectronCollectionLabel");
+
+
+    dataset = cfg.getParameter<std::string>("inputDataset");
+    isMC = cfg.getParameter<bool>("isMC");
+    updateEnergyError = cfg.getParameter<bool>("updateEnergyError");
+    lumiRatio = cfg.getParameter<double>("lumiRatio");
+    correctionsType = cfg.getParameter<int>("correctionsType");
+    applyLinearityCorrection = cfg.getParameter<bool>("applyLinearityCorrection");
+    combinationType = cfg.getParameter<int>("combinationType");
+    verbose = cfg.getParameter<bool>("verbose");
+    synchronization = cfg.getParameter<bool>("synchronization");
+    combinationRegressionInputPath = cfg.getParameter<std::string>("combinationRegressionInputPath");
+    scaleCorrectionsInputPath = cfg.getParameter<std::string>("scaleCorrectionsInputPath");
+    linCorrectionsInputPath   = cfg.getParameter<std::string>("linearityCorrectionsInputPath");
+    applyExtraHighEnergyProtection = cfg.getParameter<bool>("applyExtraHighEnergyProtection");
+
+    //basic checks
+    if ( isMC && ( dataset != "Summer11" && dataset != "Fall11"
+        && dataset!= "Summer12" && dataset != "Summer12_DR53X_HCP2012"
+        && dataset != "Summer12_LegacyPaper" ) )
     {
       throw cms::Exception("CalibratedgsfElectronProducer|ConfigError") << "Unknown MC dataset";
     }
@@ -291,43 +292,43 @@ void CalibratedElectronProducer::produce( edm::Event & event, const edm::EventSe
 	      
 	      switch ( combinationType )
                 {
-		case 0:
-		  if ( verbose )
-		    {
-		      std::cout << "[CalibratedGsfElectronProducer] "
-				<< "You choose not to combine." << std::endl;
-		    }
-		  break;
-		case 1:
-		  if ( verbose )
-		    {
-		      std::cout << "[CalibratedGsfElectronProducer] "
-				<< "You choose corrected regression energy for standard combination" << std::endl;
-		    }
-		  myCombinator->setCombinationMode(1);
-		  myCombinator->combine(mySimpleElectron);
-		  break;
-		case 2:
-		  if ( verbose )
-		    {
-		      std::cout << "[CalibratedGsfElectronProducer] "
-				<< "You choose uncorrected regression energy for standard combination" << std::endl;
-		    }
-		  myCombinator->setCombinationMode(2);
-		  myCombinator->combine(mySimpleElectron);
-		  break;
-		case 3:
-		  if ( verbose )
-		    {
-		      std::cout << "[CalibratedGsfElectronProducer] "
-				<< "You choose regression combination." << std::endl;
-		    }
-		  myEpCombinationTool->combine(mySimpleElectron);
-		  theEnCorrector->correctLinearity(mySimpleElectron);
-		  break;
-		default:
-		  throw cms::Exception("CalibratedgsfElectronProducer|ConfigError")
-		    << "Unknown combination Type !!!" ;
+                    case 0:
+                        if ( verbose )
+                        {
+                            std::cout << "[CalibratedGsfElectronProducer] "
+                            << "You choose not to combine." << std::endl;
+                        }
+                        break;
+                    case 1:
+                        if ( verbose )
+                        {
+                            std::cout << "[CalibratedGsfElectronProducer] "
+                            << "You choose corrected regression energy for standard combination" << std::endl;
+                        }
+                        myCombinator->setCombinationMode(1);
+                        myCombinator->combine(mySimpleElectron);
+                        break;
+                    case 2:
+                        if ( verbose )
+                        {
+                            std::cout << "[CalibratedGsfElectronProducer] "
+                            << "You choose uncorrected regression energy for standard combination" << std::endl;
+                        }
+                        myCombinator->setCombinationMode(2);
+                        myCombinator->combine(mySimpleElectron);
+                        break;
+                    case 3:
+                        if ( verbose )
+                        {
+                            std::cout << "[CalibratedGsfElectronProducer] "
+                            << "You choose regression combination." << std::endl;
+                        }
+                        myEpCombinationTool->combine(mySimpleElectron, applyExtraHighEnergyProtection);
+                        theEnCorrector->correctLinearity(mySimpleElectron);
+                        break;
+                    default:
+  		                throw cms::Exception("CalibratedgsfElectronProducer|ConfigError")
+                            << "Unknown combination Type !!!" ;
                 }
 	      
 	      math::XYZTLorentzVector oldMomentum = ele.p4() ;

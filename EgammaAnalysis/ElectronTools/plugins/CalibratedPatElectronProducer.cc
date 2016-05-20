@@ -56,6 +56,7 @@ CalibratedPatElectronProducer::CalibratedPatElectronProducer( const edm::Paramet
     combinationRegressionInputPath = cfg.getParameter<std::string>("combinationRegressionInputPath");
     scaleCorrectionsInputPath = cfg.getParameter<std::string>("scaleCorrectionsInputPath");
     linCorrectionsInputPath   = cfg.getParameter<std::string>("linearityCorrectionsInputPath");
+    applyExtraHighEnergyProtection = cfg.getParameter<bool>("applyExtraHighEnergyProtection");
 
     //basic checks
     if ( isMC && ( dataset != "Summer11" && dataset != "Fall11"
@@ -279,7 +280,7 @@ void CalibratedPatElectronProducer::produce( edm::Event & event, const edm::Even
                             std::cout << "[CalibratedPATElectronProducer] "
                             << "You choose regression combination." << std::endl;
                         }
-                	    myEpCombinationTool->combine(mySimpleElectron);
+                	    myEpCombinationTool->combine(mySimpleElectron, applyExtraHighEnergyProtection);
                         theEnCorrector->correctLinearity(mySimpleElectron);
                 	    break;
                 	default:

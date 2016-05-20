@@ -18,11 +18,12 @@ class EpCombinationTool
 
         bool init(const GBRForest *forest) ;
         bool init(const std::string& regressionFile, const std::string& bdtName);
+	void combine(SimpleElectron & mySimpleElectron, bool applyExtraHighEnergyProtection = false);
+
 	void combine(SimpleElectron & mySimpleElectron) const;
 
-
     private:
-        const GBRForest* m_forest;
+        const GBRForest* m_forest;	
         bool  m_ownForest;
 
 };
